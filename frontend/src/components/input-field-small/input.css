@@ -1,0 +1,74 @@
+.inputSmall-body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: start;
+    justify-self: center;
+    width: 80%;
+    height: 150%;
+}
+
+.inputSmall-title {
+    display: flex;
+    position: relative;
+    font-size: clamp(12px, 1vw, 50px);
+    font-weight: 500;
+    top: 1.3vw;
+    left: 0.6vw;
+    text-align: start;
+    align-self: start;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputSmall-field {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%; 
+    /* clamp(50px, 5.5vh, 1000px) */
+    border-radius: clamp(8px, 0.6vw, 200px);
+    border: 2px solid black;
+    padding-top: 1vw;
+    padding-left: 0.8vw;
+    font-size: clamp(12px, 1vw, 50px);;
+    transition: box-shadow 0.2s ease-in-out;
+    font-weight: 550;
+    box-sizing: border-box;
+}
+
+.inputSmall-field:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    outline: rgb(0, 123, 255);
+}
+
+.inputSmall-field::placeholder{
+    justify-self: center;
+    padding-left: 0.8vw;
+    font-size: clamp(12px, 1.2vw, 50px);
+}
+
+@media(max-width: 1100px) {
+
+}
+
+@media(max-width: 730px) {
+
+}
+
+@media(max-width: 460px) {
+    .inputSmall-title {
+        top: 2vh;
+        left: 2vw
+    }
+    .inputSmall-field {
+        height: 100%;
+        box-sizing: border-box;
+        padding-top: 2vh;
+    }
+}

@@ -1,0 +1,37 @@
+.check-box-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.check-box-label {
+    font-size: clamp(13px, 1.1vw, 50px);
+    font-weight: 500;
+    margin-left: 0.5vw;
+}
+
+.check-box {
+    width: clamp(15px, 1.4vw, 50px);
+    min-width: 15px;
+    min-height: 15px;
+    height: clamp(15px, 1.4vw, 50px);
+    border-radius: clamp(4px, 0.4vw, 50px);
+    background-color: #D9D9D9;
+    border: 1px solid black;
+    appearance: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.check-box:checked {
+    background-color: rgb(43, 43, 43);
+}
+
+.check-box:hover{
+    transform: scale(1.2);
+}
+
+.check-box-small {
+    width: clamp(10px, 1.1vw, 50px); 
+    height: clamp(10px, 1.1vw, 50px);
+}

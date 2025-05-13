@@ -1,0 +1,138 @@
+.welcome-body {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+    z-index: 1;
+    object-fit: contain;
+}
+
+.welcome-about > p {
+    font-size: clamp(20px, 2vw, 1000px);
+    position: relative;
+    top: 10vh;
+}
+
+.welcome-body::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+
+.welcome-about {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: clamp(1vw, 2vw, 60px);
+    padding-left: 6vw;
+    font-weight: bold;
+    text-shadow: 2px 5px 15px rgba(0,0,0,0.25);
+}
+
+.welcome-contacts {
+    position: absolute;
+    bottom: -5.1vh;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+    width: 90%;
+    height: 10%;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-self: end;
+    justify-content: space-around;
+    align-items: start;
+}
+
+.welcome-contacts > a {
+    font-size: clamp(15px, 1.2vw, 100px);
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 1vw;
+    margin-right: 2vw;
+    font-weight: 500;
+    text-decoration: none;
+    font-style: normal;
+    color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.welcome-contacts > a:hover {
+    transform: scale(1.05);
+    color: aqua;
+}
+
+.welcome-contacts > h4 {
+    font-size: clamp(15px, 1.2vw, 100px);
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 1vw;
+    margin: 0;
+    margin-right: 2vw;
+    position: relative;
+    font-weight: bold;
+}
+
+.welcome-selection {
+    display: flex;
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-top: 10vh;
+    margin-right: 12vw;
+    border-radius: 1.2vw;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    justify-self: center;
+}
+
+@media(max-width: 700px){
+    .welcome-selection {
+        height: 70%;
+        margin-top: 10vh;
+    }
+}
+
+@media(max-width: 460px) {
+    .welcome-selection {
+        width: 90%;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+        margin: auto;
+        border-radius: 15px;
+    }
+    .welcome-contacts > h4 {
+        margin-bottom: 2vh;
+        background-color: rgba(0,0,0,0);
+        font-weight: bold;
+    }
+    .welcome-contacts > a {
+        margin-bottom: 2vh;
+        background-color: rgba(0,0,0,0);
+    }
+    .welcome-contacts {
+        bottom: 55vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .welcome-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .welcome-about > p {
+        top:1vh;
+    }
+}

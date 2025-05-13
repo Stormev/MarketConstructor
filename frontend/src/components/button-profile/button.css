@@ -1,0 +1,34 @@
+.button-profile{
+    background-image: url('./enter.png');
+    width: clamp(20px, 2.5vw, 100px) ;
+    height: clamp(20px, 2.5vw, 100px);
+    border-radius: 0.9vw;
+    border: none;
+    background-size: clamp(20px, 1.5vw, 100px);
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease-in-out;
+    justify-self: center;
+}
+
+.button-profile:hover{
+    transform: scale(1.2);
+}
+
+/* @media(max-width: 1150px){
+    .button-profile{
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 0.5em;
+        margin-top: 5px;
+        background-size: 1em;
+        margin-bottom: 8px;
+    }
+} */
+
+/* @media(max-width: 460px){
+    .button-profile{
+        margin-top: 0.2em;
+    }
+} */

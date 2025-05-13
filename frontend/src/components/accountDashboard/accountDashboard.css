@@ -1,0 +1,433 @@
+.account-body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    background-color: #F3F3F3;
+}
+
+.account-panel {
+    width: clamp(190px, 20vw, 1000px);
+    background: white;
+    height: 100vh;
+    box-shadow: 5px 0px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    z-index: 2;
+}
+
+.account-panel.active {
+    display: flex;
+    position: absolute;
+    left: 0;
+}
+
+.account-panel-block, .account-panel-block-end {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    height: 30%;
+    left: 2vw;
+    margin-bottom: 2vw;
+}
+
+.account-panel-block-end {
+    margin-bottom: 0px;
+    height: 20%;
+}
+
+.account-panel-block > h2 {
+    margin: 0;
+}
+
+.account-panel-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+    width: 80%;
+    border-radius: clamp(5px, 1vw, 64px);
+    height: 16%;
+    border: none;
+    transition: 0.2s ease-in-out;
+    margin: 3% 0px;
+}
+
+.account-panel-item:hover {
+    transform: scale(1.1);
+}
+
+.account-panel-item.active {
+    background: linear-gradient(0deg, rgba(0, 153, 255, 0.1), rgba(0,0,0,0));
+}
+
+.account-panel-item:hover > img {
+    transform: translateY(-4px);
+}
+
+.account-panel-item > p {
+    font-size: clamp(14px, 1.1vw, 64px);
+    font-weight: 500;
+    margin-left: 2vw;
+}
+
+.account-panel-item > img {
+    position: relative;
+    margin-left: 1vw;
+    width: 32px;
+    height: 32px;
+    transition: 0.2s ease-in-out;
+}
+
+.account-panel-block::after {
+    content: "";
+    position: absolute;
+    background-color: rgba(0,0,0,0.4);
+    width: 70%;
+    height: 1px;
+    top: 20%;
+}
+
+.account-content {
+    width: 80vw;
+    height: 100vh;
+}
+
+.account-content-block{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.account-content-title{
+    display: flex;
+    width: 100%;
+    height: 5vw;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    position: relative;
+    left: 2vw;
+    top: 1vw;
+}
+
+.account-content-title > img {
+    width: 48px;
+    height: 48px;
+}
+
+.account-content-title > span {
+    width: 70%;
+    height: 2px;
+    background-color: rgba(0,0,0,0.2);
+    justify-self: center;
+    position: relative;
+    top: 1.4vw;
+}
+
+.account-content-title > h2 {
+    font-size: clamp(18px, 2vw, 64px);
+    font-weight: bold;
+    margin: 0vw 1vw;
+}
+
+.account-content-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.account-content-main > *:only-child  {
+    justify-self: start;
+}
+
+.account-content-card {
+    width: 20vw;
+    height: 35vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+    border-radius: clamp(15px, 1vw, 50px);
+    justify-self: center;
+    margin: 2vw;
+}
+
+.account-content-card > img {
+    width: 80%;
+    height: 40%;
+    background-position: center;
+    margin: 0.5vw;
+    background-size: cover;
+}
+
+.account-content-card > h3 {
+    text-align: center;
+    margin: 0;
+}
+
+.account-content-card > .blue-button {
+    max-height: 9%;
+}
+
+.account-content-card-description {
+    margin: 0.5vw;
+    margin-bottom: 1vw;
+}
+
+.account-content-card-description > p, .account-content-card-description > span, .account-content-card-description > span > p{
+    font-size: clamp(13px, 1.1vw, 64px);
+    font-weight: 600;
+}
+.account-content-card-description > span{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 2vw;
+    gap: 0;
+}
+
+.account-content-card-description > span > p{
+    padding-left: 0.5vw;
+    -webkit-text-stroke: 0.2px rgba(0,0,0,1.2);
+}
+
+.account-content-check {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    position: relative;
+    width: 90%;
+    height: clamp(100px, 20vh, 400px);
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+    justify-self: center;
+    border-radius: clamp(10px, 3vw, 30px);
+    margin: 1.2vh;
+    box-sizing: border-box;
+    padding-left: 4%;
+}
+
+.account-content-check-description {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: auto;
+}
+
+.account-content-check-description > img {
+    aspect-ratio: 1/1;
+    width: clamp(32px, 3vw, 64px);
+}
+
+.account-content-check-description > h3 {
+    font-size: clamp(14px, 2vw, 64px);
+    margin: 0;
+    margin-left: 1vw;
+}
+
+.account-content-check-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: auto;
+    margin-top: 2%;
+}
+
+.account-content-check-data > p {
+    font-size: clamp(13px, 2vw, 32px);
+    font-weight: 500;
+    margin: 1%;
+    margin-left: 4%;
+}
+
+.account-content-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.account-content-row > * {
+    justify-self: center;
+}
+
+.account-menu-body {
+    position: absolute;
+    top: 5vw;
+    left: 8vw;
+    display: flex;
+    flex-direction: row;
+    transition: 0.2s ease-in-out;
+}
+
+.account-menu-body.active{
+    position: absolute;
+    left: 35vw;
+    z-index: 5;
+}
+.account-menu-body.active > label {
+    display: none;
+}
+
+.account-menu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: clamp(20px, 1.5vw, 1000px);
+    height: clamp(20px, 1.5vw, 1000px);
+    border-radius: clamp(5px, 0.2vw, 100px);
+    transition: 0.2s ease-in-out;
+    z-index: 10;
+    justify-self: center;
+}
+
+.account-menu-body > label {
+    font-size: clamp(15px, 1vw, 100px);
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.account-menu:hover {
+    transform: scale(1.2);
+}
+
+.account-menu > span {
+    background-color: black;
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+}
+
+.account-menu::before, .account-menu::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: black;
+    transition: 0.2s ease-in-out;
+    border-radius: 2px;
+}
+
+.account-menu::before {
+    top: 0;
+}
+
+.account-menu::after {
+    bottom: 0;
+}
+.account-menu-bar > li:hover {
+    transform: scale(1.2);
+}
+
+.account-menu.active > span {
+    /* transform: rotate(-45deg) translate(0, 65%); */
+    transform: scale(0);
+}
+
+.account-menu.active::before{
+    top: 50%;
+    transform: rotate(45deg) translate(0, -65%);
+}
+
+.account-menu.active::after{
+    bottom: 50%;
+    transform: rotate(-45deg) translate(0, 65%);
+}
+
+@media(max-width: 990px){
+    .account-content-card {
+        height: 45vh;
+    }
+    .account-content-title {
+        height: 10vw;
+        align-items: center;
+    }
+}
+
+@media(max-width: 700px){
+    .account-content-main{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .account-content-card {
+        width: 30vw;
+        height: 50vh;
+    }
+    .account-content-title {
+        height: 14vw;
+        align-items: center;
+    }
+    .account-content-card > .blue-button {
+        margin-top: 1vw;
+        width: 60%;
+        height: 6%;
+    }
+}
+
+@media(min-width: 481px){
+    .account-menu-body {
+        display: none;
+    }
+    .account-panel.active {
+        position: relative;
+    }
+}
+
+@media(max-width: 480px){
+    .account-content {
+        width: 100vw;
+    }
+    .account-menu-body {
+        display: flex;
+    }
+    .account-panel {
+        display: none;
+    }
+    .account-content-card {
+        width: 45vw;
+    }
+    .account-content-card > .blue-button {
+        margin-top: 5vw;
+        margin-bottom: 0.2vw;
+        width: 90%;
+        height: 6%;
+    }
+    .account-content-title {
+        justify-content: end;
+    }
+    .account-content-title > h2 {
+        margin-right: 6vw;
+    }
+    .account-content-title > img {
+        width: 32px;
+        height: 32px;
+    }
+    .account-menu-body {
+
+    }
+    .account-content-title > span {
+        display: none;
+    }
+}

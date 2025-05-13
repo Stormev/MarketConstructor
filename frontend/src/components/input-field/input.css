@@ -1,0 +1,31 @@
+.input-title {
+    display: flex;
+    width: auto;
+    font-size: clamp(13px, 1.2vw, 50px);
+    margin-bottom: 9px;
+    font-weight:600;
+}
+
+.input-field {
+display: flex;
+justify-content: center;
+width: clamp(300px, 30vw, 50vw);
+height: clamp(45px, 6vh, 40px);
+border-radius: clamp(6px, 0.4vw, 200px);
+border: 2px solid black;
+padding-top: 0.3vw;
+padding-left: 1.0vw;
+font-size: clamp(14px, 1.2vw, 50px);;
+transition: box-shadow 0.2s ease-in-out;
+}
+
+.input-field:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    outline: rgb(0, 123, 255);
+}
+
+.input-field::placeholder{
+    justify-self: center;
+    padding-left: 0.8vw;
+    font-size: clamp(12px, 1.2vw, 50px);
+}
