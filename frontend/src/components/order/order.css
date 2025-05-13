@@ -1,0 +1,233 @@
+.order-body {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    grid-template-columns: 0.6fr 1fr;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.order-title {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: start;
+    text-align: center;
+    color: white;
+    z-index: 1;
+    background-size: cover;
+}
+
+.order-logo {
+    position: relative;
+    display: flex;
+    margin-top: 1.5vh;
+    padding-left: 1.5vw;
+}
+
+.order-info {
+    margin: auto;
+    margin-bottom: 36vh;
+}
+
+.order-info > h1 {
+    font-size: clamp(15px, 2.2vw, 50px);
+    margin-bottom: 5vh;
+}
+
+.order-info > h2 {
+    font-size: clamp(15px, 1.8vw, 50px);
+    font-weight: 500;
+}
+
+.order-title::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+
+.order-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.order-back {
+    position: relative;
+    top: 2vh;
+    right: 22vw;
+    transition: 0.2s ease-in-out;
+}
+
+.order-back:hover {
+    transform: scale(1.2);
+}
+
+.order-back > a {
+    font-size: clamp(12px, 1.1vw, 100px);
+    font-weight: 500;
+    text-decoration: none;
+    color: rgb(0,150,255);
+}
+
+.order-input-title {
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    justify-content: flex-start;
+    margin-top: 2vh;
+}
+
+.order-input-title > h1 {
+    font-size: clamp(15px, 2.2vw, 60px);
+    margin-bottom: 0.5vh;
+}
+
+.order-input-title > p {
+    font-size: clamp(13px, 1vw, 50px);
+    opacity: 0.5;
+    margin-left: 0.1vw;
+    margin-bottom: -2vw;
+}
+
+.order-boxes {
+    width: clamp(300px, 30vw, 50vw);
+    display: flex;
+    flex-direction: row;
+    margin: 1vw;
+    justify-content: space-between;
+}
+
+.order-services {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 3vw;
+    /* outline: 1px solid red; */
+}
+
+.order-services::after {
+    content: '';
+    position: absolute;
+    top: -0.5vw;
+    background-color: rgba(0,0,0,0.2);
+    width: 70%;
+    height: 2px;
+}
+
+.order-services > h2 {
+    font-size: clamp(13px, 1.2vw, 100px);
+    font-weight: 500;
+}
+
+.order-services-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    /* outline: 1px solid green; */
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10vw;
+}
+
+.order-services-boxes > * {
+    justify-self: start;
+    margin: 0.5vw;
+}
+
+.order-services > h2 {
+    margin: 0px;
+}
+
+.order-submit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1vh;
+    align-items: center;
+}
+
+.order-submit > a {
+    text-align: center;
+    font-size: clamp(14px, 1.1vw, 50px);
+    margin-top: 1vh;
+    text-decoration: none;
+    color: #0048FF;
+    font-style: normal;
+    transition: transform 0.2s ease-in-out;
+}
+
+.order-submit > a:hover {
+    transform: scale(1.2);
+}
+
+.order-alt {
+    display: flex;
+    width: clamp(300px, 30vw, 50vw);
+    font-size: clamp(12px, 1.1vw, 50px);
+    justify-content: center;
+    font-weight: 500;
+    border-bottom: 1px solid grey;
+}
+
+.order-bottom {
+    position: absolute;
+    bottom: 0px;
+    display: none;
+}
+
+@media(max-width: 1400px){
+    .order-info{
+        margin: auto;
+    }
+}
+
+@media(max-width: 700px){
+    .order-info{
+        margin: auto;
+    }
+    .order-boxes {
+        margin-top: 2vh;
+    }
+    .order-submit {
+        margin-top: 2vh;
+    }
+}
+
+@media(max-width: 480px){
+    .order-body {
+        grid-template-columns: 1fr;
+    }
+    .order-bottom {
+        display: flex;
+    }
+    .order-back {
+        top: 0vh;
+        right: 35vw;;
+    }
+    .order-form {
+        justify-content: center;
+        margin: auto;
+        margin-bottom: 22vh;
+    }
+    .order-services {
+        margin-top: 10vw;
+    }
+    .order-services::after {
+        width: 80%;
+    }
+    .order-title {
+        display: none;
+    }
+}

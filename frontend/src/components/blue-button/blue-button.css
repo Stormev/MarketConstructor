@@ -1,0 +1,47 @@
+.blue-button {
+    display: flex;
+    width: 15vw;
+    height: 3.5vw;
+    color: white;
+    background: linear-gradient(45deg, #45A5FF, #3877FF);
+    transition: transform 0.2s ease-in-out;
+    border-radius:clamp(8px, 0.5vw, 200px);
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.25);
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(13px, 1.1vw, 1000px);
+    user-select: none;
+    font-weight: bold;
+    text-shadow: 5px 8px 15px rgba(0,0,0,0.25);
+}
+
+.blue-button-submit {
+    width: clamp(200px, 45vw, 400px);
+    height: clamp(50px, 4vw, 400px);
+    font-size: clamp(15px, 1.1vw, 200px);
+}
+
+.blue-button-big {
+    width: clamp(200px, 45vw, 400px);
+    height: clamp(50px, 4vw, 400px);
+    font-size: clamp(15px, 1.1vw, 200px);
+}
+
+.blue-button-medium {
+    width: clamp(160px, 22vw, 1200px);
+    height: clamp(35px, 4.5vw, 1200px);
+    font-size: clamp(12px, 1.2vw, 1000px);
+}
+
+.blue-button:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* @media(max-width: 700px){
+
+}
+
+@media(max-width: 460px) {
+
+} */
