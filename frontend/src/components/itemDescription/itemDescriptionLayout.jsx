@@ -2,12 +2,42 @@ import "./itemDescription.css"
 import Nav from "../nav/nav"
 import ItemDescription from "./itemDescription"
 import Footer from "../footer/footer"
+import axios from "axios"
+import {useNavigate, useParams} from "react-router-dom"
+import { useState, useEffect } from "react"
+
+const api_url = process.env.REACT_APP_API_URL;
+const api_port = process.env.REACT_APP_API_PORT;
 
 export default function ItemDescriptionLayout(){
+    const navigate = useNavigate()
+    const [product, set_product] = useState(null)
+    const {id} = useParams()
+
+    useEffect(() => {
+        const GetProduct = () => {
+            axios.get(`${api_url}:${api_port}/api/store/product/${id}`).then(
+                response => {
+                    const data = response.data
+                    console.log(data)
+                    if (Object.keys(data).length > 0) {
+                        set_product(<ItemDescription title={data.title} cost={data.cost} address={data.location} images={data.images} year={data.year} material={data.material} mortgage={data.mortgage} comfort={data.tier} rooms={data.room_count} services={data.service} size={data.size} facing={data.facing} description={data.description}/>) 
+                    }
+                }).catch(err=> {
+                    console.error(err)
+                    navigate("/")
+                })
+        return <div>None</div>
+        }
+    GetProduct()
+    setTimeout(()=>{
+    }, 60000)
+  }, []);
+
     return(
         <div>
             <Nav/>
-            <ItemDescription title="Частный дом" cost={24000000} address="Московская область, Зеленоградский округ, Матушкино, д.*" images={{}} year={2024} material="дерево" mortgage={true} comfort="Комфорт" rooms={4} services={true} size={120} facing={true} description={"Общая площадь: Просторные комнаты, которые создают ощущение свободы и уюта. \nГостиная: Светлая и просторная, с большими окнами, через которые проникает естественный свет. Здесь можно установить камин для создания теплой атмосферы. \nКухня: Современная кухня с удобной планировкой, оснащенная всей необходимой техникой и местом для обеденного стола, что делает её идеальным местом для семейных встреч. \nСпальни: Три уютные спальни, каждая из которых может стать личным пространством для каждого члена семьи. Большие окна обеспечивают хорошую вентиляцию и свет. \nУчасток: Участок окружен зеленью, что создаёт атмосферу уединения и спокойствия. Здесь можно организовать зону для отдыха, посадить сад или создать место для барбекю."}/>
+            {product}
             <Footer/>
         </div>
     )

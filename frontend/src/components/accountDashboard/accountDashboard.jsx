@@ -91,11 +91,29 @@ export default function AccountDashboard(){
         navigate('/')
     }
 
+    const GetItems = ({mode=1}) => {
+        switch (mode) {
+            case 1:
+                {
+                    return GetProducts()
+                }
+            case 2:
+                {
+                    return;
+                }
+            case 3:
+                {
+                    return;
+                }
+            default: return <div>None</div>
+        }
+    }
+
     const GetProducts = () => {
         const [product_list, set_product_list] = useState({})
-        axios.get(`${api_url}:${api_port}/api/accounts/products`).then(
+        axios.post(`${api_url}:${api_port}/api/accounts/product/`, {"access_token": localStorage.getItem("access_token")}).then(
             response => {
-                const result = response.data.get('result')
+                const result = response.data['result']
                 if (!result) return;
                 return (
                     <div>
@@ -117,7 +135,7 @@ export default function AccountDashboard(){
         setActiveMenu(!activeMenu)
     }
 
-    const Board = ({title, img, isOneRow=false}) => {
+    const Board = ({title, img, isOneRow=false, mode=1}) => {
         return (
             <div className="account-content-block">
                 <div className="account-content-title">
@@ -126,7 +144,7 @@ export default function AccountDashboard(){
                     <span/>
                 </div>
                 <div className={`"account-content-main" ${isOneRow && "account-content-row"}`} id="card-board">
-
+                    {GetItems(mode)}
                 </div>
             </div>
         )
@@ -136,7 +154,6 @@ export default function AccountDashboard(){
     const BoardItem = ({mode=1}) => {
         switch (mode) {
             case 1:
-                console.log("1")
                 return (<Board title="Товары" img="/images/icons/cart.png"/>);
             case 2:
                 return (<Board title="Пред. Заказы" img="/images/icons/letter.png"/>);
