@@ -1,8 +1,4 @@
 from django.db import models
-import sys
-import os
-project_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "."))
-sys.path.append(project_directory)
 
 
 # Create your models here.
@@ -13,7 +9,6 @@ class Products(models.Model):
     cost = models.DecimalField(max_digits=10, decimal_places=2)
     precost = models.DecimalField(max_digits=10, decimal_places=2)
     prepaid = models.BooleanField(default=False)
-    images = models.ImageField(upload_to='products/')
 
     address = models.CharField(max_length=100)
     material = models.CharField(max_length=50)
@@ -24,4 +19,11 @@ class Products(models.Model):
     size = models.IntegerField()
     facing = models.BooleanField(default=False)
     service = models.BooleanField(default=False)
+    description = models.CharField(max_length=2300, default="Нет описания")
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Products, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images/')
+    alt_text = models.CharField(max_length=100, blank=True)
 

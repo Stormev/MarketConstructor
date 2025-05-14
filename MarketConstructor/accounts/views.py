@@ -73,22 +73,37 @@ class CreateUser(APIView):
 
 
 class GetUserProducts(APIView):
-    def get(self, request):
-        access_token = None
+    def post(self, request):
+        access_token = request.data.get('access_token')
         user = None
-        products = None
+
         try:
-            access_token = AccessToken(request.data.get("access_token"))
+            access_token = AccessToken(access_token)
             user = Users.objects.get(user_id=access_token['user_id'])
-            products = UserProductsSerializer(UserProducts.objects.get(user_id=user))
         except Exception as err:
             print(err)
             return Response({'message': "invalid_access_token"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        return Response({'message': 'success', 'result': products})
+        products = UserProducts.objects.filter(user_id=user.user_id)
+        products = UserProductsSerializer(products, many=True)
+        return Response({'message': 'success', 'result': products.data})
+        ##print('Продукты отстутствуют')
+        ##return Response({'message': 'success', 'result': {}})
+
 
 
 
 class GetUserChecks(APIView):
-    def get(self, request):
-        pass
+    def post(self, request):
+        access_token = None
+        user = None
+        checks = None
+        try:
+            access_token = AccessToken(request.data.get("access_token"))
+            user = Users.objects.get(user_id=access_token['user_id'])
+            checks = None
+        except Exception as err:
+            print(err)
+            return Response({'message': "invalid_access_token"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response({'message': 'success', 'result': checks})
