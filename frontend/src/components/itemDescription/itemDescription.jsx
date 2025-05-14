@@ -60,40 +60,42 @@ export default function ItemDescription({title, cost, address, images1, descript
                     <h2>Характеристики</h2>
                     <p>{constructionType}</p>
                     <div className="itemDescription-content-attribute-list">
-                        {material && 
-                            <div className="itemDescription-content-attribute-item">
-                                <img src="/images/icons/stack.png" alt="icon" />
-                                <p>Основной материал: {material}</p>
-                            </div>}
-                        {year && 
-                            <div className="itemDescription-content-attribute-item">
-                                <img src="/images/icons/calendar.png" alt="icon" />
-                                <p>Год постройки: {year}</p>
-                            </div>}
+                        <div className="itemDescription-content-attribute-item">
+                            <img src="/images/icons/stack.png" alt="icon" />
+                            <p>Основной материал: {material}</p>
+                        </div>
+                        <div className="itemDescription-content-attribute-item">
+                            <img src="/images/icons/calendar.png" alt="icon" />
+                            <p>Год постройки: {year}</p>
+                        </div>
                         <div className="itemDescription-content-attribute-item">
                             <img src="/images/icons/list1.png" alt="icon" />
                             <p>Ипотека: {mortgage ? "Возможна" : "Недоступно"}</p>
                         </div>
-                        {comfort && 
-                            <div className="itemDescription-content-attribute-item">
-                                <img src="/images/icons/comfort.png" alt="icon" />
-                                <p>Класс: {comfort}</p>
-                            </div>}
-                        {rooms && 
-                            <div className="itemDescription-content-attribute-item">
-                                <img src="/images/icons/interior.png" alt="icon" />
-                                <p>Кол-во комнат: {rooms}</p>
-                            </div>}
-                        {size && 
-                            <div className="itemDescription-content-attribute-item">
-                                <img src="/images/icons/aspect.png" alt="icon" />
-                                <p>Площадь: {size} кв.м</p>
-                            </div>}
-                        {facing && 
+                        <div className="itemDescription-content-attribute-item">
+                            <img src="/images/icons/comfort.png" alt="icon" />
+                            <p>Класс: {comfort}</p>
+                        </div>
+
+                        <div className="itemDescription-content-attribute-item">
+                            <img src="/images/icons/interior.png" alt="icon" />
+                            <p>Кол-во комнат: {rooms}</p>
+                        </div>
+                        <div className="itemDescription-content-attribute-item">
+                            <img src="/images/icons/aspect.png" alt="icon" />
+                            <p>Площадь: {size} кв.м</p>
+                        </div>
+                        {facing ? 
                             <div className="itemDescription-content-attribute-item">
                                 <img src="/images/icons/work.png" alt="icon" />
                                 <p>Отделка: с отделкой</p>
-                            </div>}
+                            </div>
+                            :
+                            <div className="itemDescription-content-attribute-item">
+                                <img src="/images/icons/work.png" alt="icon" />
+                                <p>Отделка: Без отделки</p>
+                            </div>
+                            }
                         <div className="itemDescription-content-attribute-item">
                             <img src="/images/icons/services.png" alt="icon" />
                             <p>ЖКХ: {services ? "Подключено" : "Отсутсвует"}</p>
@@ -103,7 +105,7 @@ export default function ItemDescription({title, cost, address, images1, descript
             </div>
             <div className="itemDescription-data">
                 <div className="itemDescription-data-main">
-                    <h1>{cost ? Intl.NumberFormat("ru-RU").format(cost) : "Неизвестно"} ₽</h1>
+                    <h1>{cost ? Math.floor(cost).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : "Неизвестно"} ₽</h1>
                     <div className="itemDescription-data-main-attribute">
                         {size && cost &&
                             <div className="itemDescription-data-attribute-item">
