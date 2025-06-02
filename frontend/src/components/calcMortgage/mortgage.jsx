@@ -3,34 +3,46 @@ import Slider from "../slider/slider"
 import InputFieldSmall from "../input-field-small/input"
 import { useEffect, useState } from 'react';
 
+// Расчет импотек по математической формуле ==============================================
 function calculateMortgage(P, annualRate, years, investment=0) {
     const r = annualRate / 12 / 100;
     const n = years * 12;
     const A = (P - investment) * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
     return A.toFixed(2); 
 }
-
+// Итоговая стоимость ==============================================
 function calculateResult(P, annualRate, years, investment=0) {
     const perMoth = calculateMortgage(P, annualRate, years, investment)
     return perMoth * (years * 12)
 }
 
+// Необходимый доход ==============================================
 function requiredIncome(P, annualRate, years, maxShare = 0.4, investment=0) {
 
     const income = +calculateMortgage(P, annualRate, years, investment) / maxShare;
     return income.toFixed(2);
 }
 
+// Главный компонент ==============================================
 export default function CalcMortgage({product=false}){
+    // Стоимость ==============================================
     const [cost, setCost] = useState(100000)
+
+    // Вклад ==============================================
     const [deposit, setDeposit] = useState(0)
+
+    // Процент ==============================================
     const [procent, setProcent] = useState(15)
+
+    // Время (в годах) ==============================================
     const [time, setTime] = useState(10)
 
+    // Лимит для депозита чтобы он не был больше стоимости ==============================================
     useEffect(() => {
         if (+deposit > +cost) {setDeposit(+cost)}
     }, [cost, deposit])
 
+    // Форма ==============================================
     return(
         <div className={`calcMortgage-body ${product ? "calcMortgage-horizontal calcMortgage-product" : ""}`}>
             <div className="calcMortgage">

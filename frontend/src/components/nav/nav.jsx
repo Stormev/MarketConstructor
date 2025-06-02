@@ -1,8 +1,12 @@
 import './nav.css'
 import Logo from '../logo/logo.jsx'
 import ButtonProfile from '../button-profile/button-profile.jsx'
+
+// Legacy контроллер для меню (отдельный js) ==============================================
 import MenuController from '../../scripts/navMenu.js'
 
+
+// Навигационная панель ==============================================
 export default function Nav(){
     return (
         <nav className='nav-nav'>
@@ -16,7 +20,7 @@ export default function Nav(){
                     {/* <li><a href="/stock" className='nav-link'>Акции</a></li> */}
                     <li><a href="/welcome" className='nav-link'>Контакты</a></li>
                     <li><a href="/order" className='nav-link'>Заказать услугу</a></li>
-                    <li><a href="/rate" className='nav-link'>Отзывы</a></li>
+                    <li><a href="tel:+1234567890" className='nav-link'>+8 414 412 12 12</a></li>
                     </ul>
                     {/* <a href='localhost:3000' className='nav-link'>Купить недвижимость</a>
                     <a href='localhost:3000' className='nav-link'>Услуги</a>
@@ -43,7 +47,7 @@ export default function Nav(){
                         {/* <li><a href="/stock" className='nav-link'>Акции</a></li> */}
                         <li><a href="/welcome">Контакты</a></li>
                         <li><a href="/order">Заказать услугу</a></li>
-                        <li><a href="/rate">Отзывы</a></li>
+                        <li><a href="tel:+1234567890">+8 414 412 12 12</a></li>
                     </ul>
                 </div>
         </nav>

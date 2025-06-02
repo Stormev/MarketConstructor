@@ -4,12 +4,15 @@ import BlueButton from "../blue-button/blue-button.jsx"
 import InputField from "../input-field/input.jsx"
 import CheckBox from "../checkbox/checkbox.jsx"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const apiPort = process.env.REACT_APP_API_PORT;
 
 export default function Order(){
+    const navigate = useNavigate()
+    // Данные ==============================================
     const [formData, setFormData] = useState({
         user_name: '',
         phone: '',
@@ -23,6 +26,11 @@ export default function Order(){
         other: false,
     });
 
+    const [userData, setUserData] = useState({})
+    const [callToUser, setCallToUser] = useState(false)
+
+    // Ручка на checkbox из услуг ==============================================
+
     const handleChange = (e) => {
         const { name, type, value, checked } = e.target;
         setFormData({
@@ -31,8 +39,36 @@ export default function Order(){
         });
     };
 
+    // Ручка на checkbox позвонить на номер аккаунта ==============================================
+
+    const handleCallToUser = () => {
+        setCallToUser(!callToUser)
+    }
+
+    // Получение пользователя (если авторизован) ==============================================
+    useEffect(()=> {
+        axios.post(`${apiUrl}:${apiPort}/api/accounts/user/`, {
+            access_token: localStorage.getItem("access_token"),
+            refresh_token: localStorage.getItem("refresh_token"),
+        }).then(response=>{
+            if(!response.data || (userData && Object.keys(userData).length > 0)) return;
+            setUserData(response.data)
+        }).catch(err=>{
+            console.error(err)
+        });
+    }, [])
+
+    // Отправка данных ==============================================
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (callToUser) {
+            setFormData(
+                {
+                    ...formData,
+                    ['phone']: userData.phone
+                }
+            )
+        }
         try {
         const response = await axios.post(`${apiUrl}:${apiPort}/api/orders/`, formData);
         console.log('Заказ создан:', response.data);
@@ -43,6 +79,7 @@ export default function Order(){
     }
   };
 
+    // Главная форма ==============================================
     return(
         <div className="order-body">
             <div className="order-title" style={{backgroundImage: "url(/images/backgroundOrder.png)"}}>
@@ -56,18 +93,18 @@ export default function Order(){
             </div>
             <form className="order-form">
                 <div className="order-back">
-                    <a href="/">{"<"} Вернуться</a>
+                    <a href="#" onClick={()=>navigate(-1)}>{"<"} Вернуться</a>
                 </div>
                 <section className="order-input-title">
                     <p>Давайте начнем.</p>
                     <h1>Обратная связь</h1>
                 </section>
                 <div className="order-input">
-                    <InputField text="Ваша почта" name="mail" placeholder="Как к вам обращаться?" onChange={handleChange}/>
-                    <InputField text="Телефон" name="phone" placeholder="Ваш мобильный номер телефона" onChange={handleChange}/>
+                    <InputField text="Ваше имя" name="user_name" placeholder="Как к вам обращаться?" onChange={handleChange}/>
+                    {!callToUser && <InputField text="Телефон" name="phone" placeholder="Ваш мобильный номер телефона" onChange={handleChange}/>}
                 </div>
                 <div className="order-boxes">
-                    <CheckBox text="Позвонить на номер акаунта" name="userPhone"/>
+                    {userData && userData.phone && <CheckBox text="Позвонить на номер акаунта" name="userPhone" onChange={handleCallToUser}/>}
                 </div>
                 <div className="order-services">
                     <h2>Выберите Услуги</h2>

@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'https://localhost:3000']
 
-
 # Application definition
 
 INSTALLED_APPS = [

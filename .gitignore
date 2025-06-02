@@ -2,3 +2,4 @@ venv/
 .idea/
 frontend/build
 frontend/node_modules
+MarketConstructor/secret.py

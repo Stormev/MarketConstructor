@@ -47,6 +47,7 @@
 }
 
 .storeCard-layer-main {
+    margin-left: 2%;
     display: grid;
     grid-template-columns: 0.9fr 0.6fr 0.6fr 0.4fr;
     width: 100%;
@@ -121,12 +122,12 @@
     justify-content: start;
 }
 
-.storeCard-additional > div {
+.storeCard-additional > button {
     position: relative;
     width: 90%;
     height: 12%;
     top: 1vw;
-    right: 1vw;
+    right: 2vw;
     border-radius: clamp(20px, 4vw, 100px);
     background: linear-gradient(45deg, #00AAFF, #2C8EFF);
 }

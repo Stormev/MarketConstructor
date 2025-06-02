@@ -6,6 +6,12 @@ from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from .models import Users, UserProducts
 from .serializer import UserSerializer, UserProductsSerializer
 from datetime import timedelta
+from store.models import Products
+from store.serializer import ProductsSerializer
+from payments.serializer import PaymentsSerializer
+
+# Получает весь response и возвращает модель User или None
+from .utils import get_user_from_token
 
 # Принято решение  хранить токены в local storange тк
 # для куки хранения требуется https - заморочка с созданием прокси
@@ -75,35 +81,68 @@ class CreateUser(APIView):
 class GetUserProducts(APIView):
     def post(self, request):
         access_token = request.data.get('access_token')
-        user = None
+        user = get_user_from_token(request)
+        if not user:
+            return Response({'message': "invalid_token"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        try:
-            access_token = AccessToken(access_token)
-            user = Users.objects.get(user_id=access_token['user_id'])
-        except Exception as err:
-            print(err)
-            return Response({'message': "invalid_access_token"}, status=status.HTTP_401_UNAUTHORIZED)
-
-        products = UserProducts.objects.filter(user_id=user.user_id)
-        products = UserProductsSerializer(products, many=True)
-        return Response({'message': 'success', 'result': products.data})
-        ##print('Продукты отстутствуют')
-        ##return Response({'message': 'success', 'result': {}})
-
-
+        product_ids = UserProducts.objects.filter(user_id=user.user_id).values_list('product_id', flat=True)
+        products = Products.objects.prefetch_related('images').filter(product_id__in=product_ids)
+        return Response(ProductsSerializer(products, many=True).data)
 
 
 class GetUserChecks(APIView):
     def post(self, request):
-        access_token = None
-        user = None
-        checks = None
+        user = get_user_from_token(request)
+        if not user:
+            return Response({'message': "invalid_token"}, status=status.HTTP_401_UNAUTHORIZED)
+        checks = user.checks.all()
+        return Response(PaymentsSerializer(checks, many=True).data)
+
+
+class GetUserPreOrder(APIView):
+    def post(self, request):
+        user = get_user_from_token(request)
+        if not user:
+            return Response({'message': "invalid_token"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        product_ids = UserProducts.objects.filter(user_id=user.user_id).filter(is_preorder=True)\
+            .values_list('product_id', flat=True)
+        pre_order = Products.objects.prefetch_related('images').filter(product_id__in=product_ids)
+        return Response(ProductsSerializer(pre_order, many=True).data)
+
+
+class GetUserData(APIView):
+    def post(self, request):
+        user = get_user_from_token(request)
+        if not user:
+            return Response({'message': "invalid_token"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+
+
+class UpdateUserData(APIView):
+    def put(self, request):
+        user = get_user_from_token(request)
+        if not user:
+            return Response({'message': "invalid_token"}, status=status.HTTP_401_UNAUTHORIZED)
+
         try:
-            access_token = AccessToken(request.data.get("access_token"))
-            user = Users.objects.get(user_id=access_token['user_id'])
-            checks = None
+            if request.data and request.data.get('phone') and request.data.get('mail'):
+                if user.phone != request.data.get('phone'):
+                    user.phone = request.data.get('phone')
+
+                if user.mail != request.data.get('mail'):
+                    user.mail = request.data.get('mail')
+
+                user.save()
+
+            if request.data and request.data.get('old_password') and request.data.get('new_password'):
+                valid = user.change_password(request.data.get('old_password'), request.data.get('new_password'))
+                if not valid:
+                    return Response({'message': "invalid"}, status=status.HTTP_400_BAD_REQUEST)
+
         except Exception as err:
             print(err)
-            return Response({'message': "invalid_access_token"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'message': "invalid"}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response({'message': 'success', 'result': checks})
+        return Response({'message': 'ok'}, status=status.HTTP_200_OK)

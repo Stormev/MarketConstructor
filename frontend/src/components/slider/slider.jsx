@@ -1,5 +1,6 @@
 import './slider.css'
 
+// Компонент слайдера ==============================================
 export default function Slider({className="", min="0", max="0", id="", name="", defaultValue="", onChange=""}){
     return(
         <div className='slider-body'>

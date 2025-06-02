@@ -28,7 +28,7 @@ render() {
         <Route path='/order' element={<Order/>}/>
         <Route path='/account' element={<AccountDashboard/>}/>
         <Route path='/product/:id' element={<ItemDescriptionLayout/>}/>
-        <Route path='/payment' element={<Payment/>}/>
+        <Route path='/payments/preorder/:id' element={<Payment/>}/>
       </Routes>
     </Router>
   )

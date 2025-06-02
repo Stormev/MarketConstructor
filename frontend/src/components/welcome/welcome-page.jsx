@@ -3,6 +3,7 @@ import Logo from '../logo/logo.jsx'
 import BlueButton from '../blue-button/blue-button.jsx'
 import user_replace from '../../scripts/replace.js'
 
+// Главный компонент (им воообще кто-то пользуется?) ==============================================
 export default function Welcome(){
     return (
         <div className='welcome-body' style={{backgroundImage: "url('/images/welcome-background.png')"}}>

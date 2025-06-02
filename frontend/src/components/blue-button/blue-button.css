@@ -1,7 +1,8 @@
 .blue-button {
+    all: unset;
     display: flex;
-    width: 15vw;
-    height: 3.5vw;
+    width: clamp(150px, 15vw, 1000px);
+    height: clamp(40px, 3.5vw, 1000px);
     color: white;
     background: linear-gradient(45deg, #45A5FF, #3877FF);
     transition: transform 0.2s ease-in-out;
@@ -15,19 +16,19 @@
     text-shadow: 5px 8px 15px rgba(0,0,0,0.25);
 }
 
-.blue-button-submit {
+.blue-button.blue-button-submit {
     width: clamp(200px, 45vw, 400px);
     height: clamp(50px, 4vw, 400px);
     font-size: clamp(15px, 1.1vw, 200px);
 }
 
-.blue-button-big {
+.blue-button.blue-button-big {
     width: clamp(200px, 45vw, 400px);
     height: clamp(50px, 4vw, 400px);
     font-size: clamp(15px, 1.1vw, 200px);
 }
 
-.blue-button-medium {
+.blue-button.blue-button-medium {
     width: clamp(160px, 22vw, 1200px);
     height: clamp(35px, 4.5vw, 1200px);
     font-size: clamp(12px, 1.2vw, 1000px);

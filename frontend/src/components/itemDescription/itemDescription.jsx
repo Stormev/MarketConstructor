@@ -7,18 +7,26 @@ import 'swiper/css/thumbs';
 import { useState } from "react";
 import CalcMortgage from "../calcMortgage/mortgage";
 import BlueButton from "../blue-button/blue-button";
+import { useNavigate } from "react-router-dom";
 
-export default function ItemDescription({title, cost, address, images1, description="Описание отсутствует", year, constructionType="Сооружение", 
-    material, mortgage, comfort, rooms, services, size, facing}){
+const api_url = process.env.REACT_APP_API_URL;
+const api_port = process.env.REACT_APP_API_PORT;
+
+// Главный компонент принимает данные из itemDescriptionLayout ==============================================
+export default function ItemDescription({title, cost, address, images, description="Описание отсутствует", year, constructionType="Сооружение", 
+    material, mortgage, comfort, rooms, services, size, facing, item_link}){
         const [thumbsSwiper, setThumbsSwiper] = useState(null);
+        const navigate = useNavigate()
 
-        const images = [
+        // Изображения по умолчанию ==============================================
+        const test_images = [
           'https://picsum.photos/id/1011/600/400',
           'https://picsum.photos/id/1012/600/400',
           'https://picsum.photos/id/1013/600/400',
           'https://picsum.photos/id/1015/600/400',
         ];
-
+        
+    // Форма ==============================================
     return(
         <div className="itemDescription-body">
             <div className="itemDescription-content">
@@ -34,9 +42,15 @@ export default function ItemDescription({title, cost, address, images1, descript
                         thumbs={{ swiper: thumbsSwiper }}
                         modules={[Thumbs, Navigation]}
                         >
-                        {images.map((src, i) => (
+                        {images ? 
+                            images.map((src, i) => (
                             <SwiperSlide key={i}>
-                            <img src={src} alt={`Slide ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                <img src={`${api_url}:${api_port}${src['image']}`} alt={`Slide ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            </SwiperSlide>
+                        )) :
+                            test_images.map((src, i) => (
+                            <SwiperSlide key={i}>
+                                <img src={src} alt={`Slide ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -49,9 +63,15 @@ export default function ItemDescription({title, cost, address, images1, descript
                         modules={[Thumbs, FreeMode]}
                         className="itemDescription-content-image-thumbnails"
                         >
-                        {images.map((src, i) => (
+                        {images ? 
+                            images.map((src, i) => (
                             <SwiperSlide key={i}>
-                            <img src={src} alt={`Thumb ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                <img src={`${api_url}:${api_port}${src['image']}`} alt={`Slide ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            </SwiperSlide>
+                        )) :
+                            test_images.map((src, i) => (
+                            <SwiperSlide key={i}>
+                                <img src={src} alt={`Slide ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -140,8 +160,8 @@ export default function ItemDescription({title, cost, address, images1, descript
                         <CalcMortgage product={true}/>
                     </div>
                     <div className="itemDescription-data-main-buttons">
-                        <BlueButton text="Внести пред. оплату"/>
-                        <BlueButton text="Покупка без пред. оплаты"/>
+                        <BlueButton text="Внести пред. оплату" onClick={()=>navigate(`/payments/preorder/${item_link}`)}/>
+                        <BlueButton text="Покупка без пред. оплаты" onClick={()=>navigate("/order")}/>
                     </div>
                 </div>
                 <div className="itemDescription-data-description">

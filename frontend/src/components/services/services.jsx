@@ -3,6 +3,7 @@ import CardService from '../CardService/card'
 import user_replace from '../../scripts/replace.js'
 import './services.css'
 
+// Компонент для layout ==============================================
 export default function Services(){
     return(
         <div className='services-body'>
@@ -10,7 +11,7 @@ export default function Services(){
                 <h1>Наши услуги</h1>
                 <div className='serices-line'/>
             </section>
-
+            {/* Карточки с услугами ============================================== */}
             <div className='services-main'>
                 <CardService title='Строительство частных домов' cost='800тыс.' time='6 месяцев' endtime='1.5 года' image='/images/cards/house.png'/>
                 <CardService title='Строительство многоэтажных домов' cost='2 млн.' time='1.5 года' endtime='' image='/images/cards/flat.png'/>

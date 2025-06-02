@@ -2,6 +2,8 @@ import './footer.css'
 import Logo from '../logo/logo.jsx'
 
 export default function Footer(){
+    
+    // Главный компонент ==============================================
     return (
         <footer className='footer-body'>
             <div className='footer-start'>

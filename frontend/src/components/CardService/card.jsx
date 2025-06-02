@@ -2,6 +2,7 @@ import './card.css'
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 
+// компонент карточка для услуг ==============================================
 export default function CardService({title='Name', cost='*', time='*', endtime='', image='/images/cards/projectBlue.png'}){
     const navigate = useNavigate();
 

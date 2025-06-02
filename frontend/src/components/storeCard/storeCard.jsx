@@ -2,14 +2,19 @@ import BlueButton from "../blue-button/blue-button"
 import "./storeCard.css"
 import { useNavigate } from "react-router-dom"
 
-export default function StoreCard({title="Нет данных", cost="Нет данных", precost="Нет данных", itemlink="Нет данных", images={}, location="Нет данных", material="Нет данных", year="Нет данных", mortgage="Нет данных", comfort="Нет данных", count_rooms="Нет данных", size="Нет данных", facing="Нет данных", service="Нет данных"}){
+const api_url = process.env.REACT_APP_API_URL;
+const api_port = process.env.REACT_APP_API_PORT;
+
+// Главный копонент карточки товара у store принимает данные ==============================================
+// !!! ОБЯЗАТЕЛЬНО itemlink = id 
+export default function StoreCard({title="Нет данных", cost="Нет данных", precost="Нет данных", itemlink="Нет данных", images='', location="Нет данных", material="Нет данных", year="Нет данных", mortgage="Нет данных", comfort="Нет данных", count_rooms="Нет данных", size="Нет данных", facing="Нет данных", service="Нет данных"}){
     const navigate = useNavigate()
     return(
         <div className="storeCard-body">
             <div className="storeCard-main">
                 <div className="storeCard-layer-main" onClick={()=> {navigate(`/product/${itemlink}`)}}>
                     <div className="storeCard-image">
-                        <img src="/images/project-house.png" alt="Изображение структуры" onClick={()=> {navigate(`/product/${itemlink}`)}}/>
+                        <img src={images ? `${api_url}:${api_port}${images}` : "/images/project-house.png"} alt="Изображение структуры" onClick={()=> {navigate(`/product/${itemlink}`)}}/>
                     </div>
                     <div className="storeCard-content">
                         <h3>{title}</h3>
@@ -60,8 +65,8 @@ export default function StoreCard({title="Нет данных", cost="Нет д�
                 <div className="storeCard-layer-bottom">
                     <h1>{Math.floor(cost).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} ₽</h1>
                     <h3>Пред. Оплата: {Math.floor(precost).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} ₽</h3>
-                    <BlueButton text="Покупка без пред. оплаты"/>
-                    <BlueButton text="Внести пред. оплату"/>
+                    <BlueButton text="Покупка без пред. оплаты" onClick={() => {navigate(`/order`)}}/>
+                    <BlueButton text="Внести пред. оплату" onClick={() => {navigate(`/payments/preorder/${itemlink}`)}}/>
                 </div>
             </div>
         </div>

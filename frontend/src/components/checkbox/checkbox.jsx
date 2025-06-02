@@ -1,5 +1,6 @@
 import './checkbox.css'
 
+// компонент кастомный чекбокс ==============================================
 export default function CheckBox({text='', name="", confid=false, className="", checked=false, onChange=(()=>{})}){
     return(
         <div className='check-box-box'>

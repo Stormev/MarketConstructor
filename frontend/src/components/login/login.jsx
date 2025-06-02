@@ -10,15 +10,18 @@ import { useNavigate } from "react-router-dom"
 const api_url = process.env.REACT_APP_API_URL;
 const api_port = process.env.REACT_APP_API_PORT;
 
+// Главная форма ==============================================
 export default function Login (){
     const navigate = useNavigate()
 
+    // Данные ==============================================
     const [userData, setUserData] = useState({
         'mail': '',
         'password': '',
         'remember': false
     })
 
+    // Ручка на изменение данных input ==============================================
     const handleSetData = (e) => {
         const { name, value } = e.target
         setUserData({
@@ -27,6 +30,7 @@ export default function Login (){
         })
     }
 
+    // Ручка на изменение данных checkbox ==============================================
     const handleCheckboxChange = (e) => {
             setUserData({
             ...userData,
@@ -34,7 +38,9 @@ export default function Login (){
         })
     }
 
+    // Отправка данных ==============================================
     const submit = () => {
+        // Проверка корректности данных ==============================================
         if (!userData.mail) {
             alert("Поле почта не заполнено")
             return;
@@ -47,6 +53,7 @@ export default function Login (){
             alert("Поле пароля не заполнено")
             return;
         }
+        // Отправка ==============================================
         axios.post(`${api_url}:${api_port}/api/accounts/token/`, userData, {withCredentials: true})
         .then(response => {
             console.log(response.data)
@@ -62,7 +69,7 @@ export default function Login (){
                 alert('Неправильный логин или пароль')}
             })
     }
-
+    // Форма ==============================================
     return(
         <div className="login-body">
             <div className="login-title" style={{backgroundImage: "url(/images/auth-background.png)"}}>
@@ -76,7 +83,7 @@ export default function Login (){
             </div>
             <form className="login-form">
                 <div className="login-back">
-                    <a href="/">{"<"} Вернуться</a>
+                    <a href="#" onClick={()=>{navigate("/")}}>{"<"} Вернуться</a>
                 </div>
                 <section className="login-input-title">
                     <p>Давайте начнем.</p>

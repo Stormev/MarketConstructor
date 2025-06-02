@@ -10,10 +10,12 @@ import { useNavigate } from "react-router-dom"
 const api_url = process.env.REACT_APP_API_URL;
 const api_port = process.env.REACT_APP_API_PORT;
 
+// Главный компонент ==============================================
 export default function Registration (){
     const [is_privacy,set_privacy] = useState(false)
     const navigate = useNavigate()
 
+    // Данные ==============================================
     const [userData, setUserData] = useState({
         "mail": "",
         "phone": "",
@@ -21,6 +23,7 @@ export default function Registration (){
         "repeat_password": "",
     })
 
+    // Ручка на изменение данных ==============================================
     const handleInput = (e) => {
         const {name, value} = e.target;
         setUserData({
@@ -29,6 +32,7 @@ export default function Registration (){
         })
     }
 
+    // Проверка отправляеммых данных ==============================================
     const validate = () => {
         // Проверка email
         if (!userData.mail.includes("@") || !userData.mail.includes(".")) {
@@ -45,6 +49,7 @@ export default function Registration (){
         return true
   };
 
+    // Отправка данных ==============================================
     const submit = () => {
         try {
             Object.entries(userData).forEach(([key, value]) => {
@@ -74,8 +79,11 @@ export default function Registration (){
         axios.post(`${api_url}:${api_port}/api/accounts/create/`, userData, {withCredentials: true})
         .then( response => {
                 console.log('Аккаунт создан');
+
+                // Получение и установка токенов  =============================================
                 localStorage.setItem('access_token', response.data.access_token)
                 localStorage.setItem('refresh_token', response.data.refresh_token)
+
                 navigate("/account")
             }
         )
@@ -88,6 +96,7 @@ export default function Registration (){
         }
     }
 
+    // Форма ==============================================
     return(
         <div className="reg-body">
             <div className="reg-title" style={{backgroundImage: "url(/images/auth-background.png)"}}>
@@ -101,7 +110,7 @@ export default function Registration (){
             </div>
             <form className="reg-form">
                 <div className="reg-back">
-                    <a href="/">{"<"} Вернуться</a>
+                    <a href="#" onClick={()=>navigate(-1)}>{"<"} Вернуться</a>
                 </div>
                 <section className="reg-input-title">
                     <p>Давайте начнем.</p>

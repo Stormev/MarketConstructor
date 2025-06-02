@@ -1,11 +1,12 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from accounts.models import Users
 
 
 # Create your models here.
 class Payments(models.Model):
     payment_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)  # кто платит
+    user = models.ForeignKey(Users, related_name="checks", on_delete=models.CASCADE)  # кто платит
+    title = models.CharField(max_length=70)
 
     product_id = models.CharField(max_length=100, blank=True, null=True)  # ID продукта
     amount = models.DecimalField(max_digits=10, decimal_places=2)  # Стоимость
@@ -18,8 +19,9 @@ class Payments(models.Model):
         choices=[
             ('pending', 'Ожидает'),
             ('success', 'Успешно'),
-            ('failed', 'Ошибка'),
-            ('cancelled', 'Отменено')
+            ('refunded', 'Возврат'),
+            ('canceled', 'Отменено'),
+            ('in_progress', 'В процессе')
         ],
         default='pending'
     )

@@ -1,7 +1,8 @@
 import "./blue-button.css"
 
-export default function BlueButton({onClick, text, className=""}){
+// Главный компонент ==============================================
+export default function BlueButton({children, onClick, text, className="", type="button"}){
     return(
-        <div className={`blue-button ${className}`} onClick={onClick}>{text}</div>
+        <button className={`blue-button ${className}`} type={type} onClick={onClick}>{children}{text}</button>
     )
 }

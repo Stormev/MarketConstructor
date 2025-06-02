@@ -24,6 +24,6 @@ class Products(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Products, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product_images/')
+    image = models.ImageField(upload_to='products/')
     alt_text = models.CharField(max_length=100, blank=True)
 

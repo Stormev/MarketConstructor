@@ -1,4 +1,233 @@
-.payment-body {
+.payment__body {
+    width: 100%;
+    position: relative;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.payment__body::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.payment__body > * {
+    justify-self: center;
+    z-index: 2;
+}
+
+.payment__content {
+    background: white;
+    width: 35%;
+    height: 90%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.payment__content > *:last-child {
+    margin-top: auto;
+    margin-bottom: 5%;
+}
+
+.payment__content__back {
+    display: flex;
+    position: relative;
+    right: 38%;
+    top: 3%;
+    transition: 0.2s ease-in-out;
+    z-index: 2;
+}
+
+.payment__content__back > a {
+    font-size: clamp(14px, 1.1vw, 100px);
+    font-weight: 500;
+    text-decoration: none;
+    color: rgb(0,150,255);
+    z-index: 5;
+}
+
+.payment__content__back:hover {
+    transform: scale(1.2);
+}
+
+.payment__content__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.payment__content__title > h1 {
+    font-size: clamp(26px, 2vw, 64px);
+    margin: 0;
+}
+.payment__content__title > h2 {
+    font-size: clamp(24px, 1.8vw, 64px);
+    margin: 0;
+}
+
+.payment__content > span {
+    width: 80%;
+    height: 2px;
+    border-radius: 5%;
+    background: linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0.4), rgba(0,0,0,0.1));
+    margin: 2%;
+}
+
+.payment__content__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    flex: 1;
+    width: 80%;
+}
+
+.payment__content__data__swiper {
+    width: 100%;
+    height: 20%;
+    border-radius: 15px;
+    margin-top: auto;
+}
+
+.payment__content__data > h2 {
+    font-size: clamp(30px, 2.2vw, 64px);
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.payment__content__data__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    width: 90%;
+}
+
+.payment__content__data__item > h3 {
+    font-size: clamp(20px, 1.4vw, 32px);
+    font-weight: 700;
+}
+
+.payment__content__data__item > img {
+    aspect-ratio: 1/1;
+    width: clamp(20px, 6%, 64px);
+    height: auto;
+    margin: 4%;
+}
+
+.payment__content__tip {
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+    border-radius: 15px;
+    padding: 2%;
+    width: 80%;
+    height: 20%;
+    margin: 2%;
+}
+
+.payment__content__tip > p {
+    font-size: clamp(14px, 1.2vw, 32px);
+    font-weight: 500;   
+}
+
+.payment__content__link {
+    width: auto;
+    height: 10vh;
+    font-size: clamp(12px, 1.4vw, 40px);
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0% 5%;
+    overflow-wrap: break-word;
+    color: rgba(0, 140, 255, 1);
+    transition: 0.2s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    margin-top: 2%;
+    text-decoration: none;
+}
+
+.payment__content__link:hover {
+    transform: scale(1.08);
+}
+
+@keyframes payment__loading--spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.payment__loading {
+    aspect-ratio: 1/1;
+    width: 15%;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    animation: payment__loading--spin 2s linear infinite;
+    filter: invert(1);
+}
+
+@media(max-width: 1330px) {
+    .payment__content {
+        height: 75%;
+    }
+}
+
+@media(max-width: 830px) {
+    .payment__content {
+        width: 60%;
+    }
+    .payment__content__title {
+        margin-top: 6%;
+    }
+}
+
+@media(max-width: 480px) {
+    .payment__content__title {
+        margin-top: 10%;
+    }
+    .payment__content {
+        width: 90%;
+        height: 70%;
+    }
+    .payment__content > .blue-button {
+        width: 60%;
+        height: 8%;
+        font-size: 16px;
+    }
+    .payment__content__data__item {
+        width: 100%;
+    }
+    .payment__content__back {
+        right: 35%;
+        top: 2%
+    }
+    .payment__content__data__swiper {
+        margin-top: 5%;
+    }
+}
+
+/* Legacy version ==============================================================================================================*/
+/* =============================================================================================================================*/
+/* .payment-body {
     width: 100%;
     position: relative;
     display: grid;
@@ -276,4 +505,4 @@
 
 @media(max-width: 460px){
 
-}
+} */
