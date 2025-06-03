@@ -2,6 +2,7 @@ from django.apps import AppConfig
 import sys
 import subprocess
 import threading
+import os
 
 
 class AccountsConfig(AppConfig):
@@ -11,6 +12,6 @@ class AccountsConfig(AppConfig):
     def ready(self):
         if 'runserver' in sys.argv:
             def run_sync():
-                subprocess.call([sys.executable, 'manage.py', 'sync_preorder'])
+                subprocess.call([sys.executable, 'manage.py', 'sync_payments'])
 
             threading.Thread(target=run_sync, daemon=True).start()

@@ -16,7 +16,7 @@ class Command(BaseCommand):
     help = 'Синхронизирует платежи с ЮMoney и обновляет статусы заказов'
 
     def handle(self, *args, **kwargs):
-        print("Запущен фоновой скрипт синхронизации с ЮMoney")
+        print('✅  Фоновый процесс. Сихронизация с платежами')
         if not ACCESS_TOKEN:
             raise CommandError("ACCESS TOKEN ОТСУТСТВУЕТ")
 

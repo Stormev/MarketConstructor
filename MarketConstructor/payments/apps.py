@@ -2,6 +2,7 @@ from django.apps import AppConfig
 import threading
 import subprocess
 import sys
+import os
 
 
 class PaymentsConfig(AppConfig):
